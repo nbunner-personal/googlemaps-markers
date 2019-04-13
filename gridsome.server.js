@@ -14,7 +14,7 @@ module.exports = function (api) {
     const contentType = store.addContentType({
       typeName: 'Locations',
     })
-    console.log(data);
+    
     for (const item of data) {
       contentType.addNode({
         id: item.id,
