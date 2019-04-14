@@ -1,10 +1,10 @@
 <template>
   <div>
     <GmapMap
-      :center="{lat: 50, lng: 4}"
+      :center="mapCenter"
       :zoom="1"
       map-type-id="terrain"
-      style="width: 500px; height: 300px"
+      style="height: 300px; max-width:700px; width: 100%;"
     >
       <GmapInfoWindow
         :options="infoOptions"
@@ -25,21 +25,17 @@
     </GmapMap>
     <ul v-for="loc in locations" class="loc">
       <li>
-        <span class="loc__name">{{ loc.node.name }}</span>
-        <span class="loc__capital">{{ loc.node.capital }}</span>
-        <span class="latlon">
-          <span class="latlon__lat">{{ loc.node.latitude }}</span>
-          <span class="latlon__lon">{{ loc.node.longitude }}</span>
-        </span>
+        <span
+          class="loc-item loc__name"
+          @click="resetMapCenter(loc.node.latitude,loc.node.longitude)"
+        >{{ loc.node.name }}</span>
+        <span class="loc-item loc__capital">{{ loc.node.capital }}</span>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-// import GmapMap from "vue2-google-maps";
-// import GmapMarker from "vue2-google-maps";
-
 export default {
   props: {
     locations: {
@@ -66,6 +62,10 @@ export default {
           width: 0,
           height: -35
         }
+      },
+      mapCenter: {
+        lat: 50,
+        lng: 4
       }
     };
   },
@@ -83,8 +83,36 @@ export default {
         this.infoWinOpen = true;
         this.currentMidx = idx;
       }
+    },
+    resetMapCenter(lat, lng) {
+      this.mapCenter = {
+        lat: parseFloat(lat),
+        lng: parseFloat(lng)
+      };
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+      });
     }
   },
   computed: {}
 };
 </script>
+
+<style scoped>
+.loc-item {
+  display: block;
+}
+.loc__name {
+  cursor: pointer;
+  font-weight: bold;
+}
+.loc__name:hover {
+  color: #0a7bff;
+  text-decoration: underline;
+}
+.loc__capital {
+  font-style: italic;
+}
+</style>
