@@ -32,7 +32,8 @@ export default {
             lng: parseFloat(this.$page.allLocations.edges[i].node["longitude"])
           },
           clickable: true,
-          draggable: false
+          draggable: false,
+          infoText: this.$page.allLocations.edges[i].node["name"]
         });
       }
       return markers;
