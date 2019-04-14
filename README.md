@@ -1,4 +1,4 @@
-# Default starter for Gridsome
+# Googlemaps with markers, setup using the default starter for Gridsome
 
 ### 1. Install Gridsome CLI tool if you don't have
 
