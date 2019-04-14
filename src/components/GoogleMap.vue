@@ -23,7 +23,7 @@
         @click="toggleInfoWindow(m, index)"
       />
     </GmapMap>
-    <ul v-for="loc in locations" class="loc">
+    <ul v-for="loc in locations" :key="loc.node.name" class="loc">
       <li>
         <span
           class="loc-item loc__name"
